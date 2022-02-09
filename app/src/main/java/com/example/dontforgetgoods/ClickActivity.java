@@ -1,4 +1,4 @@
-package com.example.clickapplication;
+package com.example.dontforgetgoods;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -12,10 +12,7 @@ public class ClickActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.click_activity);
         TextView textView = findViewById(R.id.response_text);
-        Bundle arguments = getIntent().getExtras();
-        textView.setText(arguments.get("response").toString());
+        textView.setText(getIntent().getStringExtra("response"));
     }
-
-
 
 }

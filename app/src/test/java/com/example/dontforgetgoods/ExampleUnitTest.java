@@ -1,4 +1,4 @@
-package com.example.clickapplication;
+package com.example.dontforgetgoods;
 
 import static org.junit.Assert.assertEquals;
 
