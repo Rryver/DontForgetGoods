@@ -1,12 +1,17 @@
 package com.example.dontforgetgoods;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.dontforgetgoods.model.Product;
 import com.example.dontforgetgoods.model.Record;
@@ -21,14 +26,26 @@ public class RecordAdapter extends BaseExpandableListAdapter {
 
     private final List<Record> records;
     private final Map<Long, List<Product>> productMap;
+    private final Context context;
 
     private static LayoutInflater inflater = null;
 
     public RecordAdapter(Context context, List<Record> records, Map<Long, List<Product>> productMap) {
         this.records = records;
         this.productMap = productMap;
+        this.context = context;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void addRecord(Record record) {
+        records.add(record);
+        notifyDataSetChanged();
+    }
+
+    public void addProduct(Long recordId, Product product) {
+        productMap.get(recordId).add(product);
+        notifyDataSetChanged();
     }
 
     public void updateProducts(Long recordId, List<Product> products) {
@@ -94,6 +111,44 @@ public class RecordAdapter extends BaseExpandableListAdapter {
         TextView createdDate = vi.findViewById(R.id.record_date);
         Timestamp timestamp = DateUtils.toTimestampFromUnix(records.get(groupPosition).getCreatedAt());
         createdDate.setText(DateUtils.toStringDate(timestamp, DateUtils.DATE_FORMAT));
+
+        ImageButton button = vi.findViewById(R.id.addProductButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(context);
+                View addProductDialogView = li.inflate(R.layout.dialog_add_record, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context)
+                        .setView(addProductDialogView);
+
+                final EditText userInput = (EditText) addProductDialogView
+                        .findViewById(R.id.addRecordTitle);
+
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        String productTitle = userInput.getText().toString();
+                                        if (!productTitle.isEmpty()) {
+                                            ProductService productService = new ProductService(RecordAdapter.this);
+                                            productService.addProduct(records.get(groupPosition).getId(), productTitle);
+                                        }
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
         return vi;
     }
 

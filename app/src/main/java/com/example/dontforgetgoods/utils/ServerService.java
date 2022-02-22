@@ -3,7 +3,7 @@ package com.example.dontforgetgoods.utils;
 import com.example.dontforgetgoods.RestApi;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class ServerService {
 
@@ -15,7 +15,7 @@ public class ServerService {
     private ServerService() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create())
                 .build();
     }
 

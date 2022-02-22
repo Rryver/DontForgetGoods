@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="12dp"
+        android:text="@string/inputTitle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:labelFor="@id/addRecordTitle"/>
+
+    <EditText
+        android:id="@+id/addRecordTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:textCursorDrawable="@null">
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 
+import com.example.dontforgetgoods.RecordAdapter;
 import com.example.dontforgetgoods.RecordsActivity;
 import com.example.dontforgetgoods.model.Record;
 
@@ -16,7 +17,12 @@ import retrofit2.Response;
 
 public class RecordService {
 
-    private final Activity activity;
+    private Activity activity;
+    private RecordAdapter recordAdapter;
+
+    public RecordService(RecordAdapter recordAdapter) {
+        this.recordAdapter = recordAdapter;
+    }
 
     public RecordService(Activity activity) {
         this.activity = activity;
@@ -44,4 +50,23 @@ public class RecordService {
         });
     }
 
+    public void addRecord(String recordTitle) {
+        Call<Record> call = ServerService.getInstance().getRestApi().addRecord(new Record(recordTitle));
+        call.enqueue(new Callback<Record>() {
+            @Override
+            public void onResponse(Call<Record> call, Response<Record> response) {
+                if (response.isSuccessful()) {
+                    // запрос выполнился успешно, сервер вернул Status 200
+                    recordAdapter.addRecord(response.body());
+                } else {
+                    // сервер вернул ошибку
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Record> call, Throwable t) {
+
+            }
+        });
+    }
 }

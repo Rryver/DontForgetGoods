@@ -3,18 +3,24 @@ package com.example.dontforgetgoods.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Record implements Parcelable {
 
-    @SerializedName("id")
+    @JsonProperty(value = "id")
     private Long id;
-    @SerializedName("title")
+    @JsonProperty(value = "title")
     private String title;
-    @SerializedName("created_at")
+    @JsonProperty(value = "created_at")
     private Long createdAt;
-    @SerializedName("updated_at")
+    @JsonProperty(value = "updated_at")
     private Long updatedAt;
+
+    public Record() {}
+
+    public Record(String title) {
+        this.title = title;
+    }
 
     public Record(Parcel in) {
         this.id = in.readLong();

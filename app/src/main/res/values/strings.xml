@@ -2,4 +2,7 @@
     <string name="app_name">Don\'t forget goods</string>
     <string name="textClick">Click!</string>
     <string name="textRecords">Записи</string>
+    <string name="inputTitle">Введите название:</string>
+    <string name="addRecord">Добавить запись</string>
+    <string name="addProduct">Добавить продукт</string>
 </resources>

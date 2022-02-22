@@ -3,21 +3,31 @@ package com.example.dontforgetgoods.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Product implements Parcelable {
 
-    @SerializedName("id")
+    @JsonProperty("id")
     private Long id;
-    @SerializedName("title")
+    @JsonProperty("title")
     private String title;
-    @SerializedName("is_done")
+    @JsonProperty("is_done")
     private boolean isDone;
+    @JsonProperty("list_id")
+    private Long recordId;
+
+    public Product() {
+    }
+
+    public Product(String title) {
+        this.title = title;
+    }
 
     public Product(Parcel in) {
         this.id = in.readLong();
         this.title = in.readString();
         this.isDone = in.readInt() == 1;
+        this.recordId = in.readLong();
     }
 
     @Override
@@ -30,6 +40,7 @@ public class Product implements Parcelable {
         dest.writeLong(id);
         dest.writeString(title);
         dest.writeInt(isDone ? 1 : 0);
+        dest.writeLong(recordId);
     }
 
     public Long getId() {
@@ -54,6 +65,14 @@ public class Product implements Parcelable {
 
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public Long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(Long recordId) {
+        this.recordId = recordId;
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {

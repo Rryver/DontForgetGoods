@@ -58,4 +58,25 @@ public class ProductService {
     }
 
 
+    public void addProduct(Long recordId, String productTitle) {
+        Product product = new Product(productTitle);
+        product.setRecordId(recordId);
+        Call<Product> call = ServerService.getInstance().getRestApi().addProduct(product);
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if (response.isSuccessful()) {
+                    // запрос выполнился успешно, сервер вернул Status 200
+                    recordAdapter.addProduct(recordId, response.body());
+                } else {
+                    // сервер вернул ошибку
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
+    }
 }
