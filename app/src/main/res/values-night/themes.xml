@@ -3,7 +3,8 @@
     <style name="Theme.DontForgetGoods" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
         <!-- ActionBar style -->
-        <item name="actionBarStyle">@style/Widget.AppTheme.ActionBar</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
+        <item name="actionMenuTextColor">?attr/colorOnPrimary</item>
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_green_primary</item>
@@ -19,10 +20,25 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="checkboxStyle">@style/MyCheckBoxStyle</item>
+
+        <!-- Text Color -->
+        <item name="android:textColorPrimary">?attr/colorOnPrimary</item>
+
+        <item name="toolbarStyle">@style/CustomToolbarStyle</item>
     </style>
 
-    <style name="Widget.AppTheme.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+    <style name="ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
         <item name="background">@color/dark_green_primary</item>
+        <item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text_dark</item>
+<!--        <item name="android:textSize">12sp</item>-->
+    </style>
+
+    <style name="CustomToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@color/text_dark</item>
     </style>
 
     <style name="MyCheckBoxStyle" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">

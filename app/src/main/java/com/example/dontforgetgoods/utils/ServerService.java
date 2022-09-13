@@ -7,7 +7,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class ServerService {
 
-    private static final String BASE_URL = "http://192.168.0.220/api/v1/";
+    private static final String BASE_URL = "http://192.168.0.171/api/v1/";
 
     private static ServerService mInstance;
     private final Retrofit retrofit;
