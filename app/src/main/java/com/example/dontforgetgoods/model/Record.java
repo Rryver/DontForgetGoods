@@ -26,7 +26,7 @@ public class Record implements Parcelable {
         this.id = in.readLong();
         this.title = in.readString();
         this.createdAt = in.readLong();
-        this.updatedAt = in.readLong();
+//        this.updatedAt = in.readLong();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Record implements Parcelable {
         dest.writeLong(id);
         dest.writeString(title);
         dest.writeLong(createdAt);
-        dest.writeLong(updatedAt);
+//        dest.writeLong(updatedAt);
     }
 
     public Long getId() {
